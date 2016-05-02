@@ -9,29 +9,21 @@ string ArithGeoII(int arr[], int size) {
 
 	int pattern, pattern2;
 	
-	// Find the pattern for the last two
-	for (int x = 0; x < size-1; x++)
-	{
-		pattern = arr[x + 1]- arr[x];
-		pattern2 = arr[x + 1] / arr[x];
-	}
+	// Find the pattern
+	pattern = arr[1]- arr[0];
+	pattern2 = arr[1] / arr[0];
 
 	bool arith = true, geo = true;
 	// Check to see if the pattern stays true when we traverse the array
-	for (int y = 0; y < size - 1 && arith; y++)
+	for (int y = 0; y < size - 1; y++)
 	{
-		arith = false;
-		if (arr[y + 1] - arr[y] == pattern)
+		if (arr[y + 1] - arr[y] != pattern)
 		{
-			arith = true;
+			arith = false;
 		}
-	}
-	for (int z = 0; z < size - 1 && geo; z++)
-	{
-		geo = false;
-		if (arr[z + 1] / arr[z] == pattern2)
+		if (arr[y + 1] / arr[y] != pattern2)
 		{
-			geo = true;
+			geo = false;
 		}
 	}
 

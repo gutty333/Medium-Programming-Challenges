@@ -15,6 +15,7 @@ string StringScramble(string str1, string str2) {
 		found = false;
 		for (int y = 0; y < str1.length(); y++)
 		{
+			// Compare string2 to string2 to analyze if all the characters check
 			if (str2[x] == str1[y] && y != index)
 			{
 				index = y; // Safeguarding that we do not use another previously utilized letter

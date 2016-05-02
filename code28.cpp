@@ -3,13 +3,41 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 
 int LookSaySequence(int num) {
+	// Convert to a string for editing
+	stringstream convert;
+	convert << num;
+	string temp = convert.str();
 
-	// code goes here   
+	int count = 1;
+	string temp2;
+	for (int x = 0; x < temp.length(); x++)
+	{
+		// Checking the last two numbers of the sequence
+		if (x == temp.length() - 1 && temp[x] != temp[x - 1])
+		{
+			temp2.push_back(char(count + 48));
+			temp2.push_back(temp[x]);
+			count = 1;
+		}
+		// Checking the next number in the sequence
+		else if (temp[x] == temp[x + 1])
+		{
+			count++;
+		}
+		else
+		{
+			temp2.push_back(char(count+48));
+			temp2.push_back(temp[x]);
+			count = 1;
+		}
+	}
+
+	istringstream(temp2) >> num;
 	return num;
-
 }
 
 int main() {
@@ -17,7 +45,7 @@ int main() {
 	// keep this function call here
 	cout << LookSaySequence(1211) << endl; //111221
 	cout << LookSaySequence(2466) << endl; // 121426
-	cout << LookSaySequence() << endl;
+	cout << LookSaySequence(111221) << endl; // 312211
 	return 0;
 
 }

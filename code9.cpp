@@ -7,13 +7,12 @@ using namespace std;
 
 int SimpleMode(int arr[], int size) {
 
-	int value = -1, count, index = 0, high = 0;
+	int value = -1, count, high = 0;
 
 	for (int x = 0; x < size; x++)
 	{
 		// Keep track of time the number repeats and the index of that repeating number
 		count = 1;
-		index = x;
 
 		for (int y = 0; y < size; y++)
 		{

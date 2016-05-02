@@ -5,6 +5,7 @@
 #include <string>
 using namespace std;
 
+// Function for sorting the array
 void bubbleSort(int arr[], int size)
 {
 	int temp;
@@ -32,7 +33,7 @@ int Consecutive(int arr[], int size) {
 	int difference;
 	int total = 0;
 
-	// Sort the array in descending order
+	// Sort the array in ascending order
 	bubbleSort(arr, size);
 
 	// Step through the array and analyze the difference between each value

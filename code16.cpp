@@ -26,7 +26,7 @@ int TripleDouble(int num1, long long num2) {
 			}
 			if (count == 3)
 			{
-				value = int(temp1[x])-48;
+				value = int(temp1[x]);
 				break;
 			}
 		}
@@ -35,13 +35,13 @@ int TripleDouble(int num1, long long num2) {
 			break;
 		}
 	}
-
+	// Checking for the double in the second argument
 	stringstream convert2;
 	convert2 << num2;
 	string temp2 = convert2.str();
 	for (int z = 0; z < temp2.length()-1; z++)
 	{
-		if (char(value+48) == temp2[z] && temp2[z] == temp2[z + 1])
+		if (char(value) == temp2[z] && temp2[z] == temp2[z + 1])
 		{
 			return 1;
 		}

@@ -8,6 +8,7 @@ int Division(int num1, int num2) {
 
 	int high = 1;
 	int size;
+	// Find the greatest of the two arguments
 	if (num1 >= num2)
 	{
 		size = num1;

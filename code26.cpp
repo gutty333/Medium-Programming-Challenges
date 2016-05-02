@@ -31,7 +31,7 @@ string NumberEncoding(string str) {
 		}
 		else
 		{
-			// If we find symbols or other numbers just do it
+			// If we find symbols or other numbers just do it, JUST DO IT
 			temp.push_back(str[y]);
 		}
 	}

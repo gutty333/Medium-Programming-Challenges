@@ -15,8 +15,8 @@ string RunLength(string str) {
 
 	for (int x = 0; x < str.length(); x++)
 	{
-		count = 1;
-		if (str[x] == letter)
+		count = 1; // Set the repetition number 1
+		if (str[x] == letter) // Ignore if the letter has been already recorded
 		{
 			continue;
 		}
@@ -25,6 +25,7 @@ string RunLength(string str) {
 			letter = str[x];
 		}
 
+		// Loop to check how many times the letter repeats
 		for (int y = x; y < str.length()-1; y++)
 		{
 			if (x == str.length() - 1)
@@ -37,6 +38,7 @@ string RunLength(string str) {
 			}
 		}
 
+		// Insert the results into a new string
 		temp.push_back(char(count+48));
 		temp.push_back(letter);
 	}

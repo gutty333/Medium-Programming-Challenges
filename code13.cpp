@@ -7,7 +7,7 @@
 using namespace std;
 
 string DashInsertII(int num) {
-
+	// Converting the integer number into a string type
 	stringstream convert;
 	convert << num;
 	string temp = convert.str();
@@ -15,17 +15,18 @@ string DashInsertII(int num) {
 
 	for (int x = 0; x < temp.length()-1; x++)
 	{
+		// Ignoring the zero
 		if (temp[x] == '0' || temp[x+1] == '0')
 		{
 			temp2.push_back(temp[x]);
 			continue;
 		}
-		else if (temp[x] % 2 == 0 && temp[x + 1] % 2 == 0)
+		else if (temp[x] % 2 == 0 && temp[x + 1] % 2 == 0) // Checking for even numbers
 		{
 			temp2.push_back(temp[x]);
 			temp2.push_back('*');
 		}
-		else if (temp[x] % 2 != 0 && temp[x + 1] % 2 != 0)
+		else if (temp[x] % 2 != 0 && temp[x + 1] % 2 != 0) // Checking for odd numbers
 		{
 			temp2.push_back(temp[x]);
 			temp2.push_back('-');

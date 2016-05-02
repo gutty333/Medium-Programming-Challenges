@@ -7,28 +7,35 @@ using namespace std;
 
 int BracketMatcher(string str) {
 
-	int count;
-	int index;
-	bool match;
-	bool found= false;
+	int count = 0; // Used to keep count of opening brackets
 
 	for (int x = 0; x < str.length(); x++)
 	{
-		if (str[x] == '(')
+		if (str[x] == '(') // Keep track of opening brackets
 		{
 			count++;
-			index = x;
-			found = true;
 		}
-		else if (str[x] == ')')
+		// If we find a closing bracket signify a match by decreasing the count
+		// The important rule is that for a closing tag to exist an opening tag must be found first
+		// If the rule is broken output 0
+		else if (str[x] == ')') 
 		{
 			count--;
+			if (count < 0)
+			{
+				return 0;
+			}
 		}
 	}
 
-	if (!found)
+	// Condition to assure that all the tags were closed
+	if (count == 0)
 	{
 		return 1;
+	}
+	else
+	{
+		return 0;
 	}
 }
 
@@ -43,7 +50,8 @@ int main() {
 	cout << BracketMatcher("(hi there (wow nice) this is (crazy wild))") << endl; // 1
 	cout << BracketMatcher("(the force(is strong)") << endl; // 0
 	cout << BracketMatcher("(soo easy even a (caveman (can do this stuff)) now this is radical (yeah rock on) sweet )") << endl; // 1  ((())())
-	cout << BracketMatcher("Join the (dark side)") << endl; // 1
+	cout << BracketMatcher("Jo()(in) the (dark side)") << endl; // 1
+	cout << BracketMatcher("Join) the (dark side)") << endl; // 0
 	return 0;
 
 }

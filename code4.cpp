@@ -8,6 +8,7 @@ using namespace std;
 string PalindromeTwo(string str) {
 
 	string temp;
+	// Creating a new string with only letters
 	for (int x = 0; x < str.length(); x++)
 	{
 		if ((str[x] >= 'a' && str[x] <= 'z') || (str[x] >= 'A' && str[x] <= 'Z'))
@@ -18,6 +19,7 @@ string PalindromeTwo(string str) {
 
 	string temp2 = temp;
 	int index = 0;
+	// Comparing the strings
 	for (int y = temp.length() - 1; y >= 0; y--)
 	{
 		if (temp2[index] != temp[y])

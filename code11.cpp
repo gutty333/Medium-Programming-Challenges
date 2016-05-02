@@ -53,7 +53,7 @@ string FormattedDivision(int num1, int num2) {
 			reverse(temp.begin(), temp.end());
 			temp.push_back(num[x]);
 		}
-		else if (temp.length() > 0)   
+		else if (temp.length() > 0)  
 		{
 			// Once the commas are formatted keep traversing the parent loop 
 			// Just inserting the remaining numbers after the period
