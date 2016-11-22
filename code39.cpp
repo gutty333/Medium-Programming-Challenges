@@ -58,7 +58,6 @@ string WordSplit(string strArr[])
 			{
 				index = temp.length(); // Keeps track of where we need to continue for comparing the second half
 
-				cout << "Our first half is " << temp << endl;
 				// Checks for the second half
 				for (int z = 0; z < strArr[1].length(); z++)
 				{
@@ -74,9 +73,25 @@ string WordSplit(string strArr[])
 						// Comparing for the second half
 						// Assuming the second half exist but we failed, this implies we evaluated the wrong first half
 						// The other scenario is that no second half is found at all
-						for (int i = index; i < temp2.length(); i++)
+						
+						int size;
+
+						// Condition to check if the second half will be a valid case with current first half
+						// For example if the length of the 2 split words surpasses the target word ignore that case 
+						if (target.length() - index == temp2.length())
 						{
-							if (target[i] != temp2[i])
+							size = temp2.length();
+						}
+						else
+						{
+							temp2 = "";
+							continue;
+						}
+
+
+						for (int i = index, k=0; i < size; i++, k++)
+						{
+							if (target[i] != temp2[k])
 							{
 								valid = false;
 							}
@@ -107,8 +122,9 @@ string WordSplit(string strArr[])
 						temp2 += strArr[1][z];
 					}
 				}
+				temp = ""; // Reset in the case the second half failed
 			}
-			temp = ""; // Reset in the case the second half failed
+			
 		}
 		else // Continue to extract characters before reaching the next comma or the end
 		{
@@ -129,11 +145,11 @@ int main()
 	string F[] = { "az", "a,b,c,d,e,f,farm,g,goal,hello,world,x,y,z,zzzz" };
 
 
-	//cout << WordSplit(A) << endl; // hello,cat
-	//cout << WordSplit(B) << endl; // base,ball
-	//cout << WordSplit(C) << endl; // abcg,efd
-	//cout << WordSplit(D) << endl; // not possible
-	//cout << WordSplit(E) << endl; // ab,bbbcd
+	cout << WordSplit(A) << endl; // hello,cat
+	cout << WordSplit(B) << endl; // base,ball
+	cout << WordSplit(C) << endl; // abcg,efd
+	cout << WordSplit(D) << endl; // not possible
+	cout << WordSplit(E) << endl; // ab,bbbcd
 	cout << WordSplit(F) << endl; // a,z
 	return 0;
 }
