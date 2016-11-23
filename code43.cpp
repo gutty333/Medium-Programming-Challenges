@@ -12,6 +12,8 @@ Another example: if num is 46 then we append these integers onto a list: [4, 6].
 #include <sstream>
 using namespace std;
 
+// NOT FINISHED
+
 /*
 create a list from the input number
 have a loop process for the multiplication part
