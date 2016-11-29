@@ -20,6 +20,8 @@ The rules are similar to the game of Boggle. So for the example above, all the w
 #include <vector>
 using namespace std;
 
+// NOT FINISHED
+
 /*
 set up the first element into a matrix of letters
 this will be easier to later check adjacent spots
