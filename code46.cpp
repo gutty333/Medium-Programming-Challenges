@@ -20,8 +20,6 @@ The rules are similar to the game of Boggle. So for the example above, all the w
 #include <vector>
 using namespace std;
 
-// NOT FINISHED
-
 /*
 set up the first element into a matrix of letters
 this will be easier to later check adjacent spots
@@ -29,273 +27,166 @@ iterate through the second element word by word
 used the current word and analyzed if it can be found in our list 
 The method we will use is start with the first letter, check if the list has that first letter
 From the first letter check for adjacent options where the next letter is also matched
+Check for multiple options that is if multiple matching letters are adjacent
+analyze from one of the options and check if the word is found, if not try the other options
 Continue the process to see if all the letters can be found
 */
 
 
-// From our first letter location
+// Starting our first letter location
 // This function will analyze the neighbors and check if it completes the word
-bool findAdjacent(vector <vector <char> > letters, string value, int row,int col)
+// It will also be used recursively to handle cases in which there are multiple adjacent matching letters
+// It will follow that trail, analyzing multiple options, try one of the options, if fail try other options
+// The process will continue until all options have been tried
+bool findAdjacent(vector <vector <char> > letters, string value, int row,int col, int currentIndex)
 {
-	int index = 1;
-
+	int index = currentIndex;
+	
+	// Keep a record of our last step
+	// To properly develop this program we could have a list that tracks all the steps we have taken
+	// This will prevent us from going into those locations again
+	// For this purpose we are only avoiding the last step taken
+	int lastStep = -1;
+	
 	// We continue to loop until the end of our current word
 	while (index < value.length())
 	{
 		bool found = false;
 
-		// Condition for boundary check and also check adjacent neighbors
-		// In the case the index is in the first row
-		if (row == 0)
+		// Conditions for boundary check and also check adjacent neighbors
+		// Checking up
+		if (lastStep != 1)
 		{
-			if (letters[row + 1][col] == value[index])
+			if (row != 0 && letters[row - 1][col] == value[index])
 			{
-				index++;
-				row++;
-				found = true;
-			}
-			else if (col == 0)
-			{
-				if (letters[row][col + 1] == value[index])
+				index++; // update the index of our target word
+				row--; // update row/cols for the movement
+				lastStep = 0; // update our the last location
+
+				// Recursive call to now analyze this path
+				found = findAdjacent(letters, value, row, col, index);
+
+				// If this path failed, bring the index back down to analyze other adjacent neighbors
+				if (!found)
 				{
-					index++;
-					col++;
-					found = true;
-				}
-				else if (letters[row+1][col + 1] == value[index])
-				{
-					index++;
-					row++;
-					col++;
-					found = true;
-				}
-			}
-			else if (col == 3)
-			{
-				if (letters[row][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					found = true;
-				}
-				else if (letters[row + 1][col - 1] == value[index])
-				{
-					index++;
-					row++;
-					col--;
-					found = true;
-				}
-			}
-			else
-			{
-				if (letters[row][col + 1] == value[index])
-				{
-					index++;
-					col++;
-					found = true;
-				}
-				else if (letters[row + 1][col + 1] == value[index])
-				{
-					index++;
-					row++;
-					col++;
-					found = true;
-				}
-				else if (letters[row][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					found = true;
-				}
-				else if (letters[row + 1][col - 1] == value[index])
-				{
-					index++;
-					row++;
-					col--;
-					found = true;
-				}
-			}
-		}
-		// In the case the index is in the last row
-		else if (row == 3)
-		{
-			if (letters[row - 1][col] == value[index])
-			{
-				index++;
-				row--;
-				found = true;
-			}
-			else if (col == 0)
-			{
-				if (letters[row][col + 1] == value[index])
-				{
-					index++;
-					col++;
-					found = true;
-				}
-				else if (letters[row - 1][col + 1] == value[index])
-				{
-					index++;
-					row--;
-					col++;
-					found = true;
-				}
-			}
-			else if (col == 3)
-			{
-				if (letters[row][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					found = true;
-				}
-				else if (letters[row - 1][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					row--;
-					found = true;
-				}
-			}
-			else
-			{
-				if (letters[row][col + 1] == value[index])
-				{
-					index++;
-					col++;
-					found = true;
-				}
-				else if (letters[row - 1][col + 1] == value[index])
-				{
-					index++;
-					row--;
-					col++;
-					found = true;
-				}
-				else if (letters[row][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					found = true;
-				}
-				else if (letters[row - 1][col - 1] == value[index])
-				{
-					index++;
-					row--;
-					col--;
-					found = true;
-				}
-			}
-		}
-		else
-		{
-			if (letters[row + 1][col] == value[index])
-			{
-				index++;
-				row++;
-				found = true;
-			}
-			else if (letters[row - 1][col] == value[index])
-			{
-				index++;
-				row--;
-				found = true;
-			}
-			else if (col == 0)
-			{
-				if (letters[row][col + 1] == value[index])
-				{
-					index++;
-					col++;
-					found = true;
-				}
-				else if (letters[row + 1][col + 1] == value[index])
-				{
-					index++;
-					row++;
-					col++;
-					found = true;
-				}
-				else if (letters[row - 1][col + 1] == value[index])
-				{
-					index++;
-					row--;
-					col++;
-					found = true;
-				}
-			}
-			else if (col == 3)
-			{
-				if (letters[row][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					found = true;
-				}
-				else if (letters[row + 1][col - 1] == value[index])
-				{
-					index++;
-					row++;
-					col--;
-					found = true;
-				}
-				else if (letters[row - 1][col - 1] == value[index])
-				{
-					index++;
-					row--;
-					col--;
-					found = true;
-				}
-			}
-			else
-			{
-				if (letters[row][col + 1] == value[index])
-				{
-					index++;
-					col++;
-					found = true;
-				}
-				else if (letters[row + 1][col + 1] == value[index])
-				{
-					index++;
-					found = true;
-				}
-				else if (letters[row][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					found = true;
-				}
-				else if (letters[row + 1][col - 1] == value[index])
-				{
-					index++;
-					row++;
-					col--;
-					found = true;
-				}
-				else if (letters[row - 1][col + 1] == value[index])
-				{
-					index++;
-					row--;
-					col++;
-					found = true;
-				}
-				else if (letters[row][col - 1] == value[index])
-				{
-					index++;
-					col--;
-					found = true;
-				}
-				else if (letters[row - 1][col - 1] == value[index])
-				{
-					index++;
-					row--;
-					col--;
-					found = true;
+					index--;
 				}
 			}
 		}
 
+		// Checking left
+		if (lastStep != 2)
+		{
+			if (col != 0 && letters[row][col - 1] == value[index])
+			{
+				index++;
+				col--;
+				lastStep = 3;
+				found = findAdjacent(letters, value, row, col, index);
+				if (!found)
+				{
+					index--;
+				}
+			}
+		}
+
+		// Checking down
+		if (lastStep != 0)
+		{
+			if (row != 3 && letters[row + 1][col] == value[index])
+			{
+				index++;
+				row++;
+				lastStep = 1;
+				found = findAdjacent(letters, value, row, col, index);
+				if (!found)
+				{
+					index--;
+				}
+			}
+		}
+
+		// Checking right
+		if (lastStep != 3)
+		{
+			if (col != 3 && letters[row][col + 1] == value[index])
+			{
+				index++;
+				col++;
+				lastStep = 2;
+				found = findAdjacent(letters, value, row, col, index);
+				if (!found)
+				{
+					index--;
+				}
+			}
+		}
+
+		// Checking diagonal top left
+		if (lastStep != 4)
+		{
+			if (row != 0 && col != 0 && letters[row - 1][col - 1] == value[index])
+			{
+				index++;
+				row--;
+				col--;
+				lastStep = 5;
+				found = findAdjacent(letters, value, row, col, index);
+				if (!found)
+				{
+					index--;
+				}
+			}
+		}
+
+		// Checking diagonal top right
+		if (lastStep != 6)
+		{
+			if (row != 0 && col != 3 && letters[row - 1][col + 1] == value[index])
+			{
+				index++;
+				row--;
+				col++;
+				lastStep = 7;
+				found = findAdjacent(letters, value, row, col, index);
+				if (!found)
+				{
+					index--;
+				}
+			}
+		}
+
+		// Checking diagonal bottom left
+		if (lastStep != 7)
+		{
+			if (row != 3 && col != 0 && letters[row + 1][col - 1] == value[index])
+			{
+				index++;
+				row++;
+				col--;
+				lastStep = 6;
+				found = findAdjacent(letters, value, row, col, index);
+				if (!found)
+				{
+					index--;
+				}
+			}
+		}
+
+		// Checking diagonal bottom right
+		if (lastStep != 5)
+		{
+			if (row != 3 && col != 3 && letters[row + 1][col + 1] == value[index])
+			{
+				index++;
+				row++;
+				col++;
+				lastStep = 4;
+				found = findAdjacent(letters, value, row, col, index);
+			}
+		}
+		
+		// Condition if no adjacent correct letter was found
 		if (!found)
 		{
 			return false;
@@ -308,15 +199,12 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 // Check and find first letter of current word in our matrix
 bool search(vector <vector <char> > letters, char value, string word)
 {
-	
-
 	for (int row = 0; row < 4; row++)
 	{
 		for (int col = 0; col < 4; col++)
 		{
-			if (value == letters[row][col] && findAdjacent(letters,word,row,col))
+			if (value == letters[row][col] && findAdjacent(letters,word,row,col, 1))
 			{
-				cout << word << " was found" << endl;
 				return true;
 			}
 		}
@@ -354,22 +242,13 @@ string BoggleSolver(string strArr[])
 		}
 	}
 	
-	
 	string temp;
 	string errors;
-
-	for (int row = 0; row < 4; row++)
-	{
-		for (int col = 0; col < 4; col++)
-		{
-			cout << letterMatrix[row][col] << " ";
-		}
-		cout << endl;
-	}
 
 	// Iterate through the second element to analyze the words
 	for (int x = 0; x < strArr[1].length(); x++)
 	{
+		// Condition to separate the words
 		if (strArr[1][x] == ',' || x == strArr[1].length() - 1)
 		{
 			if (x == strArr[1].length() - 1)
@@ -377,6 +256,7 @@ string BoggleSolver(string strArr[])
 				temp += strArr[1][x];
 			}
 
+			// If the word was not found in our matrix store it
 			if (!boogle(letterMatrix, temp))
 			{
 				errors += temp;
@@ -397,7 +277,7 @@ string BoggleSolver(string strArr[])
 	}
 	else
 	{
-		return "Good";
+		return "true";
 	}
 }
 
@@ -406,11 +286,14 @@ int main()
 	string A[] = { "rbfg, ukop, fgub, mnry", "bog,bop,gup,fur,ruk" };
 	string B[] = { "aaey, rrum, tgmn, ball", "all,ball,mur,raeymnl,tall,true,trum" };
 	string C[] = { "aaey, rrum, tgmn, ball", "all,ball,mur,raeymnl,rumk,tall,true,trum,yes" };
+	string D[] = { "abfr, ryut, gmei, fadc", "abyba" };
+	string E[] = { "abfr, ryut, gmei, fadc", "abyba,cdeicz" };
 
 	cout << BoggleSolver(A) << endl; // true
 	cout << BoggleSolver(B) << endl; // true
 	cout << BoggleSolver(C) << endl; // rumk,yes
+	cout << BoggleSolver(D) << endl; // abyba
+	cout << BoggleSolver(E) << endl; // abyba,cedicz
 
 	return 0;
-
 }

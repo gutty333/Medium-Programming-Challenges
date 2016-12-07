@@ -32,10 +32,6 @@ Move in one of the path options and keep track of which option you took
 
 */
 
-void movement()
-{
-
-}
 
 
 void OptionFinder(int row, int col, string matrix[], int size, vector <vector <int> > &paths)
@@ -80,8 +76,7 @@ string MatrixPath(string strArr[], int size)
 {
 	int currentRow = 0;
 	int currentCol = 0;
-	vector <vector <int> > path;
-	vector <vector <int> > optionTaken;
+	
 
 
 }
