@@ -38,7 +38,7 @@ Continue the process to see if all the letters can be found
 // It will also be used recursively to handle cases in which there are multiple adjacent matching letters
 // It will follow that trail, analyzing multiple options, try one of the options, if fail try other options
 // The process will continue until all options have been tried
-bool findAdjacent(vector <vector <char> > letters, string value, int row,int col, int currentIndex)
+bool findAdjacent(vector <vector <char> > letters, string value, int row,int col, int currentIndex, int lastIndex)
 {
 	int index = currentIndex;
 	
@@ -46,7 +46,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 	// To properly develop this program we could have a list that tracks all the steps we have taken
 	// This will prevent us from going into those locations again
 	// For this purpose we are only avoiding the last step taken
-	int lastStep = -1;
+	int lastStep = lastIndex;
 	
 	// We continue to loop until the end of our current word
 	while (index < value.length())
@@ -64,7 +64,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				lastStep = 0; // update our the last location
 
 				// Recursive call to now analyze this path
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 
 				// If this path failed, bring the index back down to analyze other adjacent neighbors
 				if (!found)
@@ -82,7 +82,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				index++;
 				col--;
 				lastStep = 3;
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 				if (!found)
 				{
 					index--;
@@ -98,7 +98,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				index++;
 				row++;
 				lastStep = 1;
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 				if (!found)
 				{
 					index--;
@@ -114,7 +114,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				index++;
 				col++;
 				lastStep = 2;
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 				if (!found)
 				{
 					index--;
@@ -131,7 +131,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				row--;
 				col--;
 				lastStep = 5;
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 				if (!found)
 				{
 					index--;
@@ -148,7 +148,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				row--;
 				col++;
 				lastStep = 7;
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 				if (!found)
 				{
 					index--;
@@ -165,7 +165,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				row++;
 				col--;
 				lastStep = 6;
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 				if (!found)
 				{
 					index--;
@@ -182,7 +182,7 @@ bool findAdjacent(vector <vector <char> > letters, string value, int row,int col
 				row++;
 				col++;
 				lastStep = 4;
-				found = findAdjacent(letters, value, row, col, index);
+				found = findAdjacent(letters, value, row, col, index, lastStep);
 			}
 		}
 		
@@ -203,7 +203,7 @@ bool search(vector <vector <char> > letters, char value, string word)
 	{
 		for (int col = 0; col < 4; col++)
 		{
-			if (value == letters[row][col] && findAdjacent(letters,word,row,col, 1))
+			if (value == letters[row][col] && findAdjacent(letters,word,row,col, 1, -1))
 			{
 				return true;
 			}

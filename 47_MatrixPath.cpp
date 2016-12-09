@@ -24,6 +24,8 @@ For the input above, a path of 1's from the top-left to the bottom-right does no
 #include <vector>
 using namespace std;
 
+// NOT FINISHED
+
 /*
 start at the top left as your current location
 check for different path options from the current location
