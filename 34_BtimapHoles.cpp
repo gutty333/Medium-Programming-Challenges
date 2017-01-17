@@ -41,7 +41,6 @@ void groupSet(string arr[], int size, int row, int col, vector <string> & list, 
 			found = true;
 			groupSet(arr, size, row, col, list, found);
 		}
-
 		// Checking Down
 		if (row != size - 1 && arr[row + 1][col] == '0' && list[row + 1][col] == '*')
 		{
@@ -49,7 +48,6 @@ void groupSet(string arr[], int size, int row, int col, vector <string> & list, 
 			found = true;
 			groupSet(arr, size, row, col, list, found);
 		}
-
 		// Checking Left
 		if (col != 0 && arr[row][col - 1] == '0' && list[row][col-1] == '*')
 		{
@@ -57,7 +55,6 @@ void groupSet(string arr[], int size, int row, int col, vector <string> & list, 
 			found = true;
 			groupSet(arr, size, row, col, list, found);
 		}
-
 		// Checking Right
 		if (col != arr[0].length() - 1 && arr[row][col + 1] == '0' && list[row][col + 1] == '*')
 		{
@@ -82,13 +79,13 @@ int BitmapHoles(string strArr[], int size) {
 		}
 	}
 	
-
 	// Loop to find any 0s in the matrix
 	for (int row = 0; row < size; row++)
 	{
 		for (int col = 0; col < strArr[row].length(); col++)
 		{
-			// Condition count the holes
+			// Condition analyze the holes
+			// Will ignore if the 0 found is part of contiguous region
 			if (strArr[row][col] == '0' && tempMatrix[row][col] == '*')
 			{
 				// function call that will find if this current hole has contiguous zeros
