@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LinkedList6.cpp">
+    <ClCompile Include="56_SymmetricTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

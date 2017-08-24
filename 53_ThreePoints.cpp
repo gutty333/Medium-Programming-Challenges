@@ -11,6 +11,7 @@ have the function ThreePoints(strArr) read the array of strings stored in strArr
 using namespace std;
 
 /*
+NOT FINISHED
 extract the values of each point
 convert to integer for ease of use
 compare the distance between each point
