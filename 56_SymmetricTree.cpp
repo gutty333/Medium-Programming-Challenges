@@ -12,9 +12,9 @@ using namespace std;
 
 /*
 first check the number of nodes present
-if size is 1 than return true, since that represents just the root node
-if size 3 assure that it also represent just a root node, so a valid node, with 2 null nodes is valid
-if none of the previous 2 are met than need at least 7 nodes to have a mirror image of each subtree
+if size is 1 than return true only if is null
+if size is 3 assure that it also represent just a root node, so a valid node, with 2 null nodes is valid
+if none of the previous 2 are met than we need at least 7 nodes to have a mirror image of each subtree
 note that null nodes are count as an element in the array
 we are going to take an approach similar to a level order
 as we traverse the tree add parents to a queue
@@ -22,7 +22,7 @@ we than compare the children of each parent
 after comparing we pop those current parent from the queue and add the valid children
 we continue to move down the tree
 the sibling must match in a reverse fashion, meaning if parent A has a left child with value 5
-than parent B must have a right child with value 5
+than parent B must have a right child with value 5. We analyze the inverse also
 this traversal will continue until the queue is empty, note that any null nodes are not added to the queue
 */
 
@@ -56,7 +56,7 @@ string SymmetricTree(string strArr[], int size)
 		}
 		else if (strArr[0] != "#" && strArr[1] == "#" && strArr[2] == "#")
 		{
-			// This is valid since this is represents a single node
+			// This is valid since this represents a single node
 			return "true";
 		}
 	}
@@ -159,14 +159,16 @@ int main()
 	string F[] = { "30", "#", "#" };
 	string G[] = { "#", "10", "10" };
 	string H[] = { "1", "2", "2", "3", "#", "#", "7" };
+	string I[] = { "8", "6", "6", "4", "3", "3", "4", "#", "7", "5", "#", "#", "5", "7", "#", "#", "#", "#", "#", "#", "2", "#", "#", "#", "#", "2", "#", "#", "#", "#", "#" };
 
 	cout << SymmetricTree(A, sizeof(A)/sizeof(A[0]))<< endl; // true
 	cout << SymmetricTree(B, sizeof(B) / sizeof(B[0])) << endl; // false
 	cout << SymmetricTree(C, sizeof(C) / sizeof(C[0])) << endl; // true
-	cout << SymmetricTree(D, sizeof(D) / sizeof(D[0])) << endl; // true
+	cout << SymmetricTree(D, sizeof(D) / sizeof(D[0])) << endl; // false
 	cout << SymmetricTree(E, sizeof(E) / sizeof(E[0])) << endl; // true
 	cout << SymmetricTree(F, sizeof(F) / sizeof(F[0])) << endl; // true
-	cout << SymmetricTree(G, sizeof(G) / sizeof(G[0])) << endl; // true
+	cout << SymmetricTree(G, sizeof(G) / sizeof(G[0])) << endl; // false
 	cout << SymmetricTree(H, sizeof(H) / sizeof(H[0])) << endl; // false
+	cout << SymmetricTree(I, sizeof(I) / sizeof(I[0])) << endl; // true
 	return 0;
 }
