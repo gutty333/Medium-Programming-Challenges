@@ -18,5 +18,11 @@
     <ClCompile Include="56_SymmetricTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="57_BinarySearchTreeLCA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="58_TreeConstructor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
