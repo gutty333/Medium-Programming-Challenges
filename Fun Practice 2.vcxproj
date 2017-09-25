@@ -11,9 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="56_SymmetricTree.cpp" />
-    <ClCompile Include="57_BinarySearchTreeLCA.cpp" />
-    <ClCompile Include="58_TreeConstructor.cpp" />
+    <ClCompile Include="43_PairSearching.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A48563CC-5D12-4890-82E1-B6086503E339}</ProjectGuid>

@@ -19,5 +19,4 @@ int main()
 	string A[] = { "(1,2)", "(2,4)", "(7,2)" };
 	cout << TreeConstructor(A);
 	return 0;
-
 }

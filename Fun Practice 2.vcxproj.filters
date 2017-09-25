@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="56_SymmetricTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="57_BinarySearchTreeLCA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="58_TreeConstructor.cpp">
+    <ClCompile Include="43_PairSearching.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
