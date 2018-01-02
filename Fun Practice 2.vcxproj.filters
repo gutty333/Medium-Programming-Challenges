@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="43_PairSearching.cpp">
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="61_PlusMinus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
