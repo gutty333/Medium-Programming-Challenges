@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="61_PlusMinus.cpp">
+    <ClCompile Include="test3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
