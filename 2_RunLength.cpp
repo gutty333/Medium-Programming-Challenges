@@ -5,10 +5,8 @@
 #include <string>
 using namespace std;
 
-#include <iostream>
-using namespace std;
-
-string RunLength(string str) {
+string RunLength(string str) 
+{
 	string temp;
 	char letter = ' ';
 	int count;

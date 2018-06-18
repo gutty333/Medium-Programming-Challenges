@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="63_EightQueens.cpp">
+    <ClCompile Include="37_ArrayMinJumps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
