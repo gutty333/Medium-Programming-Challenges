@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="37_ArrayMinJumps.cpp" />
+    <ClCompile Include="43_PairSearching.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A48563CC-5D12-4890-82E1-B6086503E339}</ProjectGuid>

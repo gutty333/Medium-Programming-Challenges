@@ -5,29 +5,26 @@ have the function PairSearching(num) take the num parameter being passed and per
 For example: if num is 134 then first append each of the integers into a list: [1, 3, 4]. Now if we take 134 and multiply it by 3 (which is one of its own integers), we get 402. Now if we append each of these new integers to the list, we get: [1, 3, 4, 4, 0, 2]. We found an adjacent pair of duplicate numbers, namely 4 and 4. So for this input your program should return 1 because it only took 1 multiplication to find this pair.
 
 Another example: if num is 46 then we append these integers onto a list: [4, 6]. If we multiply 46 by 6, we get 276, and appending these integers onto the list we now have: [4, 6, 2, 7, 6]. Then if we take this new number, 276, and multiply it by 2 we get 552. Appending these integers onto the list we get: [4, 6, 2, 7, 6, 5, 5, 2]. Your program should therefore return 2 because it took 2 multiplications to find a pair of adjacent duplicate numbers (5 and 5 in this case).
-
-
-1 3 4 
 */
 
 #include <iostream>
 #include <vector>
-#include <sstream>
+#include <queue>
+#include <map>
+#include <algorithm>
 using namespace std;
 
-// NOT FINISHED
-
 /*
-create a list from the input number
-have a loop process for the multiplication part
-similar to 1:1 1:2 1:3 etc 
-keep track of the current number value and update the list as you multiply
-in the case we need to try a different variation of the multiplication, update the list back to its previous spot
-continue the process and keep track of the amount of multiplications done
+will be a BFS approach to analyze the possible paths
+first we create a list from input number
+we keep a record of list, number, and multiplication count
+following the rules we traverse each value of current list and multiply it to the number
+each possible scenario will be treated as a path we can take
+at each scenario we checking if current list has adjacent pairs
+we continue the traversal until an adjacent pair is found
 */
 
-
-// method to check if our current list has any pairs
+// method to check if our current list has any adjacent pairs
 bool findPair(vector <int> list)
 {
 	for (int x = 0; x < list.size() - 1; x++)
@@ -41,8 +38,10 @@ bool findPair(vector <int> list)
 }
 
 // helper function which will break the number down and add its digits to the list
-void appendList(vector <int>& list, int num)
+vector<int> getList(int num)
 {
+	vector <int> list;
+
 	while (num)
 	{
 		int temp = num % 10;
@@ -51,48 +50,87 @@ void appendList(vector <int>& list, int num)
 
 		num /= 10;
 	}
+
+	reverse(list.begin(), list.end());
+
+	return list;
 }
 
 int PairSearching(int num) 
 {
-	vector <int> list;
-	int count = 0;
-	int currentNum;
-	int currentTotal;
-	currentNum = currentTotal = num;
+	// initial starting values
+	vector <int> startingList;
+	vector <int> values;
+	values.push_back(num);
+	values.push_back(0);
 
-	// Creating our starting list
-	while (currentNum)
+	map< vector<int>, vector<int> > startingTable;
+	startingTable[startingList] = values;
+
+	queue< map< vector<int>, vector<int> > >  listPair;
+	listPair.push(startingTable);
+
+	// BFS traversal
+	while (!listPair.empty())
 	{
-		int temp = currentNum % 10;
+		// getting the current list with its state
+		map< vector<int>, vector<int> > tablePair = listPair.front();
 
-		list.push_back(temp);
+		// list of integers
+		vector <int> currentList;
 
-		currentNum /= 10;
-	}
+		// current number
+		int currentTotal;
 
-	
-	while (!findPair(list))
-	{
+		// multiplication count
+		int currentCount; 
 
+		// getting the current content (list,number,count)
+		for (auto x = tablePair.begin(); x != tablePair.end(); x++)
+		{
+			currentList = x->first;
+			currentTotal = x->second[0];
+			currentCount = x->second[1];
+		}
+
+		// appending the new integers to the list
+		vector <int> temp = getList(currentTotal);
+		for (int x = 0; x < temp.size(); x++)
+		{
+			currentList.push_back(temp[x]);
+		}
+
+		listPair.pop();
+
+		// checking if current list of integers has adjacent pair
+		if (findPair(currentList))
+		{
+			return currentCount;
+		}
+
+		// traverse the current list to analyze each path
+		for (int x = 0; x < currentList.size(); x++)
+		{
+			map< vector<int>, vector<int> > newTable;
+			vector <int> newItems;
+
+			// updating our multiplication count and number value
+			newItems.push_back(currentTotal * currentList[x]);
+			newItems.push_back(currentCount + 1);
+			newTable[currentList] = newItems;
+
+			// adding new path to our queue
+			listPair.push(newTable);
+		}
 	}
 }
 
 int main() 
 {
 	cout << PairSearching(134)<< endl; // 1
-	cout << PairSearching(46) << endl; // 2
-	cout << PairSearching(8) << endl; // 3
-	cout << PairSearching(198) << endl; // 2
-
-
-	int test = 4723;
-
-	while (test)
-	{
-		cout << test % 10 << endl;
-		test /= 10;
-	}
+	cout << PairSearching(46)<< endl; // 2
+	cout << PairSearching(8)<< endl; // 3
+	cout << PairSearching(198)<< endl; // 2
+	cout << PairSearching(2) << endl; // 3
 	return 0;
-
 }

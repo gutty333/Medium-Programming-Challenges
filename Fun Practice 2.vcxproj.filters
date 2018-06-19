@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="37_ArrayMinJumps.cpp">
+    <ClCompile Include="43_PairSearching.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
